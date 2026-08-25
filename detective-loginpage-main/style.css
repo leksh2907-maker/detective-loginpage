@@ -1,0 +1,1578 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: #080706;
+    color: #e8dfcf;
+    font-family: "Inter", sans-serif;
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   CUSTOM MAGNIFYING GLASS CURSOR
+===================================================== */
+
+.custom-cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 55px;
+    height: 55px;
+    pointer-events: none;
+    z-index: 999999;
+}
+
+.cursor-glass {
+    width: 55px;
+    height: 55px;
+    overflow: visible;
+    transform: rotate(-8deg);
+    transition:
+        width 0.2s ease,
+        height 0.2s ease,
+        transform 0.2s ease;
+}
+
+.cursor-ring {
+    fill: rgba(255, 255, 255, 0.04);
+    stroke: #eee5d4;
+    stroke-width: 3;
+    filter:
+        drop-shadow(
+            0 0 4px rgba(255, 255, 255, 0.35)
+        );
+}
+
+.cursor-shine {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.8);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+}
+
+.cursor-handle {
+    stroke: #8a6540;
+    stroke-width: 7;
+    stroke-linecap: round;
+    filter:
+        drop-shadow(
+            0 2px 3px rgba(0, 0, 0, 0.7)
+        );
+}
+
+.cursor-dot {
+    fill: #a52121;
+    filter:
+        drop-shadow(
+            0 0 5px rgba(165, 33, 33, 0.9)
+        );
+}
+
+.custom-cursor.cursor-evidence {
+    width: 68px;
+    height: 68px;
+}
+
+.custom-cursor.cursor-evidence .cursor-glass {
+    width: 68px;
+    height: 68px;
+    transform:
+        rotate(-8deg)
+        scale(1.05);
+}
+
+.custom-cursor.cursor-evidence .cursor-ring {
+    stroke: #c52d2d;
+    filter:
+        drop-shadow(
+            0 0 8px rgba(197, 45, 45, 0.65)
+        );
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 70px;
+
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 35px;
+
+    background:
+        rgba(7, 6, 5, 0.90);
+
+    backdrop-filter: blur(12px);
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 11px;
+    letter-spacing: 3px;
+
+    color: #b8ad9b;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #b21f1f;
+
+    box-shadow:
+        0 0 10px rgba(178, 31, 31, 0.8);
+}
+
+.case-number {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #8e8577;
+}
+
+.case-number strong {
+    color: #ddd1bd;
+}
+
+.menu-btn {
+    width: 40px;
+    height: 40px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.15);
+
+    background: transparent;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+}
+
+.menu-btn span {
+    width: 16px;
+    height: 1px;
+
+    background: #d6cbb8;
+}
+
+
+/* =====================================================
+   INVESTIGATION BOARD
+===================================================== */
+
+.investigation-board {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background-image:
+        url("assets/board.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    isolation: isolate;
+}
+
+.board-overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.40),
+            transparent 45%,
+            rgba(0, 0, 0, 0.40)
+        ),
+        linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.50),
+            transparent 45%
+        );
+}
+
+
+/* =====================================================
+   STRINGS
+===================================================== */
+
+.strings {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+.string {
+    stroke: #8f1010;
+    stroke-width: 2;
+    opacity: 0.9;
+
+    filter:
+        drop-shadow(
+            0 1px 2px rgba(0, 0, 0, 0.8)
+        );
+}
+
+
+/* =====================================================
+   CASE FILE
+===================================================== */
+
+.case-file {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 470px;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-1deg);
+
+    z-index: 10;
+}
+
+.case-paper {
+    position: relative;
+
+    padding:
+        70px 45px 55px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #d9c9a7,
+            #efe3c4 50%,
+            #cdb98d
+        );
+
+    color: #29231c;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.55),
+        inset 0 0 50px rgba(80, 50, 20, 0.12);
+
+    clip-path:
+        polygon(
+            1% 3%,
+            97% 0%,
+            100% 96%,
+            3% 100%,
+            0% 8%
+        );
+}
+
+.case-label {
+    display: block;
+
+    text-align: center;
+
+    font-family:
+        "Special Elite",
+        monospace;
+
+    font-size: 11px;
+    letter-spacing: 4px;
+
+    margin-bottom: 22px;
+
+    opacity: 0.65;
+}
+
+.case-paper h1 {
+    text-align: center;
+
+    font-family: Georgia, serif;
+
+    font-size: 74px;
+    line-height: 0.9;
+
+    letter-spacing: -4px;
+}
+
+.case-divider {
+    width: 80px;
+    height: 2px;
+
+    margin:
+        25px auto 16px;
+
+    background: #33291f;
+}
+
+.case-id {
+    text-align: center;
+
+    font-family:
+        "Special Elite",
+        monospace;
+
+    font-size: 14px;
+    letter-spacing: 4px;
+}
+
+.case-info {
+    margin-top: 40px;
+
+    display: flex;
+    justify-content: space-between;
+
+    border-top:
+        1px solid rgba(50, 40, 30, 0.3);
+
+    padding-top: 20px;
+}
+
+.case-info div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.case-info span {
+    font-size: 8px;
+    letter-spacing: 2px;
+    opacity: 0.6;
+}
+
+.case-info strong {
+    font-family:
+        "Special Elite",
+        monospace;
+
+    font-size: 12px;
+}
+
+.main-pin {
+    position: absolute;
+
+    width: 17px;
+    height: 17px;
+
+    top: -10px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            white 0 5%,
+            #aaa 7%,
+            #777 45%,
+            #222 100%
+        );
+
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+
+/* =====================================================
+   EVIDENCE
+===================================================== */
+
+.evidence {
+    position: absolute;
+
+    width: 260px;
+
+    z-index: 5;
+
+    transition:
+        transform 0.45s cubic-bezier(.2, .8, .2, 1),
+        filter 0.45s ease,
+        opacity 0.3s ease;
+
+    transform-origin: center;
+}
+
+.evidence-1 {
+    left: 7%;
+    top: 25%;
+
+    transform:
+        rotate(-7deg);
+}
+
+.evidence-2 {
+    right: 7%;
+    top: 25%;
+
+    transform:
+        rotate(7deg);
+}
+
+.evidence-3 {
+    left: 13%;
+    bottom: 5%;
+
+    transform:
+        rotate(5deg);
+}
+
+.evidence-4 {
+    right: 11%;
+    bottom: 5%;
+
+    transform:
+        rotate(-6deg);
+}
+
+
+/* =====================================================
+   PHOTO FRAME
+===================================================== */
+
+.photo-frame {
+    position: relative;
+
+    padding: 10px;
+
+    background: #ddd3c2;
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.6);
+
+    overflow: hidden;
+}
+
+.photo-frame img {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+
+    filter:
+        grayscale(100%)
+        sepia(15%)
+        contrast(1.05);
+
+    transition: 0.5s ease;
+}
+
+.photo-frame::after {
+    content: "";
+
+    position: absolute;
+
+    width: 90px;
+    height: 28px;
+
+    top: -15px;
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        rotate(-2deg);
+
+    background:
+        rgba(195, 180, 146, 0.8);
+
+    opacity: 0.8;
+}
+
+.photo-glare {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            110deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.25),
+            transparent 60%
+        );
+
+    transform:
+        translateX(-120%);
+
+    transition: 0.7s ease;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   EVIDENCE TEXT
+===================================================== */
+
+.evidence-note {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    margin-top: 10px;
+    padding: 0 5px;
+
+    color: #e3d7c0;
+
+    text-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+.evidence-note span {
+    font-family:
+        "Special Elite",
+        monospace;
+
+    font-size: 10px;
+    color: #a92727;
+
+    letter-spacing: 2px;
+}
+
+.evidence-note strong {
+    font-family:
+        "Special Elite",
+        monospace;
+
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.evidence-note small {
+    font-size: 8px;
+    letter-spacing: 2px;
+
+    color: #aaa091;
+}
+
+
+/* =====================================================
+   PINS
+===================================================== */
+
+.pin {
+    position: absolute;
+
+    width: 14px;
+    height: 14px;
+
+    top: -7px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            white,
+            #999 25%,
+            #333 70%
+        );
+
+    box-shadow:
+        0 4px 7px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =====================================================
+   EVIDENCE HOVER
+===================================================== */
+
+.evidence:hover {
+    z-index: 100;
+
+    transform:
+        translateY(-25px)
+        scale(1.18)
+        rotate(0deg);
+
+    filter:
+        drop-shadow(
+            0 30px 35px
+            rgba(0, 0, 0, 0.8)
+        );
+}
+
+.evidence:hover img {
+    filter:
+        grayscale(10%)
+        sepia(10%)
+        contrast(1.08);
+
+    transform:
+        scale(1.03);
+}
+
+.evidence:hover .photo-glare {
+    transform:
+        translateX(120%);
+}
+
+.investigation-board.has-active
+.evidence:not(.active) {
+    opacity: 0.88;
+
+    filter:
+        brightness(0.92);
+}
+
+.evidence.active {
+    z-index: 200;
+
+    transform:
+        translateY(-35px)
+        scale(1.22)
+        rotate(0deg) !important;
+
+    filter:
+        drop-shadow(
+            0 35px 45px
+            rgba(0, 0, 0, 0.9)
+        );
+}
+
+
+/* =====================================================
+   BOARD LABELS
+===================================================== */
+
+.board-label {
+    position: absolute;
+
+    z-index: 3;
+
+    font-family:
+        "Special Elite",
+        monospace;
+
+    font-size: 11px;
+    letter-spacing: 4px;
+
+    color:
+        rgba(230, 220, 200, 0.55);
+
+    transform:
+        rotate(-8deg);
+}
+
+.label-1 {
+    left: 4%;
+    top: 18%;
+}
+
+.label-2 {
+    right: 25%;
+    bottom: 15%;
+}
+
+.label-3 {
+    left: 37%;
+    top: 9%;
+}
+
+
+/* =====================================================
+   LOGIN BUTTON — DETECTIVE CASE FILE STYLE
+===================================================== */
+
+.login-button {
+    position: absolute;
+
+    left: 50%;
+    bottom: 48px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 500;
+
+    width: 285px;
+    min-height: 58px;
+
+    padding: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    text-decoration: none;
+    color: #e8dfcf;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(45, 38, 29, 0.98),
+            rgba(20, 17, 14, 0.98)
+        );
+
+    border: 1px solid #8d7656;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.55),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+.login-button::before {
+    content: "";
+
+    position: absolute;
+    inset: 5px;
+
+    border-top:
+        1px solid rgba(224, 207, 174, 0.18);
+
+    border-bottom:
+        1px solid rgba(224, 207, 174, 0.18);
+
+    pointer-events: none;
+}
+
+.login-button::after {
+    content: "";
+
+    position: absolute;
+
+    left: 18px;
+    right: 18px;
+    bottom: 7px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #a92727 20%,
+            #a92727 80%,
+            transparent
+        );
+
+    opacity: 0.7;
+
+    transition:
+        left 0.35s ease,
+        right 0.35s ease,
+        opacity 0.35s ease;
+}
+
+.login-button:hover {
+    transform:
+        translateX(-50%)
+        translateY(-5px);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(60, 48, 35, 0.99),
+            rgba(25, 20, 16, 0.99)
+        );
+
+    border-color: #b89b6c;
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.7),
+        0 0 20px rgba(169, 39, 39, 0.12);
+}
+
+.login-button:hover::after {
+    left: 35px;
+    right: 35px;
+
+    opacity: 1;
+}
+
+.login-button:active {
+    transform:
+        translateX(-50%)
+        translateY(-1px);
+
+    transition-duration: 0.1s;
+}
+
+.login-button:focus-visible {
+    outline: none;
+
+    border-color: #d0b17c;
+
+    box-shadow:
+        0 0 0 3px rgba(208, 177, 124, 0.15),
+        0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+
+/* =====================================================
+   LOGIN ICON
+===================================================== */
+
+.login-icon {
+    position: relative;
+    z-index: 2;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid rgba(169, 39, 39, 0.8);
+
+    color: #c53a35;
+
+    font-family: Georgia, serif;
+    font-size: 18px;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.login-button:hover .login-icon {
+    transform:
+        translateX(4px);
+
+    background:
+        rgba(169, 39, 39, 0.12);
+
+    color: #e05a52;
+}
+
+
+/* =====================================================
+   LOGIN TEXT
+===================================================== */
+
+.login-text {
+    position: relative;
+    z-index: 2;
+
+    font-family:
+        "Special Elite",
+        monospace;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+    color: #e6dbc5;
+
+    text-transform: uppercase;
+
+    transition:
+        letter-spacing 0.3s ease,
+        color 0.3s ease;
+}
+
+.login-button:hover .login-text {
+    letter-spacing: 3.5px;
+    color: #fff2d9;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.board-footer {
+    position: absolute;
+
+    bottom: 17px;
+    left: 35px;
+    right: 35px;
+
+    z-index: 20;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 8px;
+    letter-spacing: 3px;
+
+    color:
+        rgba(230, 220, 200, 0.55);
+}
+
+
+/* =====================================================
+   EVIDENCE MODAL
+===================================================== */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    z-index: 20000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background:
+        rgba(0, 0, 0, 0.8);
+
+    backdrop-filter:
+        blur(10px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        0.35s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+
+    width:
+        min(500px, 100%);
+
+    padding: 50px;
+
+    background:
+        #d9c9a7;
+
+    color:
+        #29231c;
+
+    transform:
+        translateY(30px)
+        rotate(-1deg);
+
+    transition:
+        0.4s ease;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.7);
+}
+
+.modal.show .modal-content {
+    transform:
+        translateY(0)
+        rotate(0deg);
+}
+
+.modal-content > span {
+    font-family:
+        "Special Elite",
+        monospace;
+
+    color:
+        #a01e1e;
+
+    letter-spacing: 3px;
+    font-size: 11px;
+}
+
+.modal-content h2 {
+    margin: 12px 0;
+
+    font-family:
+        "Special Elite",
+        monospace;
+
+    font-size: 34px;
+}
+
+.modal-content p {
+    line-height: 1.7;
+    color: #51473b;
+}
+
+.close-btn {
+    position: absolute;
+
+    top: 15px;
+    right: 20px;
+
+    border: none;
+    background: none;
+
+    font-size: 30px;
+    color: #30271e;
+}
+
+.investigate-btn {
+    margin-top: 25px;
+
+    padding:
+        12px 20px;
+
+    border:
+        1px solid #493d30;
+
+    background:
+        #30271e;
+
+    color:
+        #eee2ce;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+
+/* =====================================================
+   TABLET / SMALL LAPTOP
+===================================================== */
+
+@media (max-width: 900px) {
+
+    * {
+        cursor: auto;
+    }
+
+    .custom-cursor {
+        display: none;
+    }
+
+    .case-file {
+        width: 330px;
+    }
+
+    .case-paper {
+        padding:
+            50px 25px 40px;
+    }
+
+    .case-paper h1 {
+        font-size: 48px;
+    }
+
+    .evidence {
+        width: 180px;
+    }
+
+    .login-button {
+        bottom: 50px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .investigation-board {
+        min-height: 1000px;
+        height: 1000px;
+    }
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .brand {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .case-number {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    .case-file {
+        width: 290px;
+    }
+
+    .case-paper {
+        padding:
+            50px 25px 40px;
+    }
+
+    .case-paper h1 {
+        font-size: 42px;
+        letter-spacing: -2px;
+    }
+
+    .case-id {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .case-info {
+        margin-top: 28px;
+    }
+
+    .evidence {
+        width: 145px;
+    }
+
+    .evidence-1 {
+        top: 13%;
+        left: 3%;
+    }
+
+    .evidence-2 {
+        top: 13%;
+        right: 3%;
+    }
+
+    .evidence-3 {
+        bottom: 12%;
+        left: 3%;
+    }
+
+    .evidence-4 {
+        bottom: 12%;
+        right: 3%;
+    }
+
+    .board-label {
+        display: none;
+    }
+
+    .board-footer {
+        left: 15px;
+        right: 15px;
+
+        font-size: 7px;
+        letter-spacing: 2px;
+    }
+
+   /* =====================================================
+   LOGIN BUTTON — CLASSIFIED CASE ACCESS
+===================================================== */
+
+.login-button {
+    position: absolute;
+    left: 50%;
+    top: calc(50% + 215px);
+    transform: translateX(-50%);
+
+    z-index: 500;
+
+    width: 310px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    text-decoration: none;
+    color: #e8dfcf;
+
+    /* Dark evidence-folder style */
+    background:
+        linear-gradient(
+            180deg,
+            rgba(37, 31, 24, 0.98),
+            rgba(14, 12, 10, 0.98)
+        );
+
+    border: 1px solid rgba(211, 190, 153, 0.55);
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.65),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.8);
+
+    transition:
+        transform 0.3s cubic-bezier(.2,.8,.2,1),
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+
+/* Inner classified-file border */
+
+.login-button::before {
+    content: "";
+
+    position: absolute;
+    inset: 6px;
+
+    border: 1px solid rgba(218, 198, 164, 0.18);
+
+    pointer-events: none;
+
+    transition:
+        border-color 0.3s ease,
+        inset 0.3s ease;
+}
+
+
+/* Red investigation line */
+
+.login-button::after {
+    content: "";
+
+    position: absolute;
+
+    left: 28px;
+    right: 28px;
+    bottom: 6px;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #8e1717 15%,
+            #c52b2b 50%,
+            #8e1717 85%,
+            transparent
+        );
+
+    opacity: 0.75;
+
+    transition:
+        left 0.35s ease,
+        right 0.35s ease,
+        opacity 0.35s ease;
+}
+
+
+/* Small red case marker */
+
+.login-button .login-icon::before {
+    content: "";
+
+    position: absolute;
+
+    width: 6px;
+    height: 6px;
+
+    left: -5px;
+    top: -5px;
+
+    background: #a51f1f;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px rgba(165, 31, 31, 0.8);
+}
+
+
+/* =====================================================
+   LOGIN BUTTON — HOVER
+===================================================== */
+
+.login-button:hover {
+    transform:
+        translateX(-50%)
+        translateY(-6px);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(50, 40, 30, 0.99),
+            rgba(20, 16, 13, 0.99)
+        );
+
+    border-color: #b89a6b;
+
+    box-shadow:
+        0 20px 42px rgba(0, 0, 0, 0.75),
+        0 0 25px rgba(139, 25, 25, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.login-button:hover::before {
+    inset: 4px;
+    border-color: rgba(218, 198, 164, 0.3);
+}
+
+.login-button:hover::after {
+    left: 45px;
+    right: 45px;
+    opacity: 1;
+}
+
+
+/* =====================================================
+   CLICK EFFECT
+===================================================== */
+
+.login-button:active {
+    transform:
+        translateX(-50%)
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.65);
+}
+
+
+/* =====================================================
+   KEYBOARD ACCESSIBILITY
+===================================================== */
+
+.login-button:focus-visible {
+    outline: none;
+
+    border-color: #d4b77f;
+
+    box-shadow:
+        0 0 0 3px rgba(212, 183, 127, 0.14),
+        0 15px 35px rgba(0, 0, 0, 0.65);
+}
+
+
+/* =====================================================
+   LOGIN ICON
+===================================================== */
+
+.login-icon {
+    position: relative;
+
+    z-index: 2;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(165, 31, 31, 0.8);
+
+    background:
+        rgba(70, 20, 20, 0.12);
+
+    color: #b82a2a;
+
+    font-family: Georgia, serif;
+
+    font-size: 18px;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+/* Icon inner frame */
+
+.login-icon::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 4px;
+
+    border: 1px solid rgba(165, 31, 31, 0.25);
+
+    pointer-events: none;
+}
+
+
+.login-button:hover .login-icon {
+    transform:
+        translateX(5px);
+
+    background:
+        rgba(165, 31, 31, 0.16);
+
+    color: #e04b43;
+
+    border-color: #c83232;
+}
+
+
+/* =====================================================
+   LOGIN TEXT
+===================================================== */
+
+.login-text {
+    position: relative;
+
+    z-index: 2;
+
+    font-family:
+        "Special Elite",
+        monospace;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    letter-spacing: 3.5px;
+
+    color: #ded2bb;
+
+    text-transform: uppercase;
+
+    transition:
+        letter-spacing 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.login-button:hover .login-text {
+    letter-spacing: 4px;
+
+    color: #fff1d5;
+
+    transform: translateX(2px);
+}
+
+
+/* =====================================================
+   DESKTOP PERFECT ALIGNMENT
+===================================================== */
+
+@media (min-width: 1200px) {
+
+    .login-button {
+        width: 310px;
+        height: 62px;
+
+        /*
+           Keeps the button directly beneath
+           the central CASEFILE regardless of
+           screen height.
+        */
+        top: calc(50% + 215px);
+    }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .login-button {
+        width: 270px;
+        height: 58px;
+
+        top: calc(50% + 175px);
+    }
+
+    .login-text {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+
+    .login-button:hover .login-text {
+        letter-spacing: 3.5px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .login-button {
+        width: 220px;
+        height: 54px;
+
+        top: auto;
+        bottom: 55px;
+
+        gap: 12px;
+    }
+
+    .login-icon {
+        width: 27px;
+        height: 27px;
+
+        font-size: 15px;
+    }
+
+    .login-text {
+        font-size: 10px;
+        letter-spacing: 2.5px;
+    }
+
+    .login-button:hover .login-text {
+        letter-spacing: 3px;
+    }
+
+    .login-button::after {
+        left: 20px;
+        right: 20px;
+    }
+}
+}
